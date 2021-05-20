@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:intl/intl.dart';
 import 'package:todo_app/bloc/todo_list_notifier.dart';
 import 'package:todo_app/models/todo.dart';
 
@@ -8,10 +9,26 @@ import '../../constants.dart';
 
 class TodoEditPage extends HookWidget {
   final Todo todo;
+  DateTime _date = DateTime.now();
+  final DateFormat _dateFormat = DateFormat('MMM dd, yyyy');
 
   final _golbalKey = GlobalKey<FormState>();
 
   TodoEditPage(this.todo);
+
+  //  _handleDatePicker() async {
+  //   final DateTime date = await showDatePicker(
+  //       context: context,
+  //       initialDate: _date,
+  //       firstDate: DateTime(2000),
+  //       lastDate: DateTime(2100));
+  //   if (date != null && date != _date) {
+  //     setState(() {
+  //       _date = date;
+  //     });
+  //     _dateController.text = _dateFormat.format(date);
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
