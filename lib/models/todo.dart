@@ -19,6 +19,7 @@ class Todo with _$Todo {
         id: Uuid().v4(),
         title: '',
         date: DateTime.now(),
+        // time: TimeOfDay.now(),
         description: '',
         completed: false,
       );

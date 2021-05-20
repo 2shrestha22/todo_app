@@ -1,3 +1,4 @@
+import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -36,14 +37,17 @@ class TodoEditPage extends HookWidget {
 
     final titleController = useTextEditingController();
     final descriptionController = useTextEditingController();
+    final timeController = useTextEditingController();
 
     _submit() {
       if (_golbalKey.currentState!.validate()) {
-        _golbalKey.currentState!.save();
+        // _golbalKey.currentState!.save();
         provider.createTodo(
           todo.copyWith(
-              title: titleController.text,
-              description: descriptionController.text),
+            title: titleController.text,
+            description: descriptionController.text,
+            date: DateTime.tryParse(timeController.text) ?? DateTime.now(),
+          ),
         );
         Navigator.pop(context);
       }
@@ -77,8 +81,6 @@ class TodoEditPage extends HookWidget {
                           input != null && input.trim().isEmpty
                               ? "Please enter a task title"
                               : null,
-                      // onSaved: (input) => _title = input,
-                      // initialValue: _title,
                     ),
                     SizedBox(
                       height: 20,
@@ -96,40 +98,26 @@ class TodoEditPage extends HookWidget {
                           input != null && input.trim().isEmpty
                               ? "Please enter a task description"
                               : null,
-                      // onSaved: (input) => _description = input,
-                      // initialValue: _description,
                     ),
                     SizedBox(
                       height: 20,
                     ),
-                    TextFormField(
-                      // controller: _dateController,
-                      readOnly: true,
-                      // onTap: _handleDatePicker,
-                      style: TextStyle(fontSize: 15),
-                      decoration: InputDecoration(
-                        suffixIcon: Icon(Icons.calendar_today_outlined),
-                        labelText: "Date",
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(22),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    TextFormField(
-                      // controller: _timeController,
-                      readOnly: true,
-                      // onTap: _handleTimePicker,
-                      style: TextStyle(fontSize: 15),
-                      decoration: InputDecoration(
-                        suffixIcon: Icon(Icons.timer_sharp),
-                        labelText: "time",
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(22),
-                        ),
-                      ),
+                    DateTimePicker(
+                      controller: timeController,
+                      use24HourFormat: false,
+                      type: DateTimePickerType.dateTimeSeparate,
+                      dateMask: 'd MMM, yyyy',
+                      // initialValue: DateTime.now().toString(),
+                      firstDate: DateTime(2000),
+                      lastDate: DateTime(2100),
+                      icon: Icon(Icons.event),
+                      dateLabelText: 'Date',
+                      timeLabelText: "Hour",
+                      validator: (input) =>
+                          input != null && input.trim().isEmpty
+                              ? "Please pick a time"
+                              : null,
+                      onSaved: (val) => print(val),
                     ),
                     SizedBox(
                       height: 20,

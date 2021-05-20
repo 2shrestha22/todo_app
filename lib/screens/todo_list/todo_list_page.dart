@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:intl/intl.dart';
 import 'package:todo_app/bloc/todo_list_notifier.dart';
 import 'package:todo_app/constants.dart';
 import 'package:todo_app/models/todo.dart';
@@ -87,7 +88,12 @@ class TodoListItem extends HookWidget {
       onTap: () {},
       child: ListTile(
           title: Text(todo.title),
-          subtitle: Text(todo.description),
+          subtitle: Row(
+            children: [
+              Text(todo.description),
+              Text(DateFormat.yMMMMEEEEd().add_jm().format(todo.date)),
+            ],
+          ),
           trailing: Checkbox(
             value: todo.completed,
             onChanged: (value) =>

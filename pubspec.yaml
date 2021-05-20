@@ -23,6 +23,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  date_time_picker: ^2.0.0
   flutter_hooks: ^0.17.0
   freezed_annotation: ^0.14.2
   hive: ^2.0.4
