@@ -29,48 +29,8 @@ class TodoListPage extends HookWidget {
       ),
       body: ListView.separated(
         itemCount: todoList.length,
-        padding: kFloatingPadding,
         itemBuilder: (context, index) => TodoListItem(todo: todoList[index]),
         separatorBuilder: (_, __) => const SizedBox(height: kPadding),
-      ),
-    );
-  }
-
-  Widget DepartmentListItem(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        boxShadow: kShadow,
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(kBorderRadius),
-      ),
-      child: Material(
-        clipBehavior: Clip.hardEdge,
-        borderRadius: BorderRadius.circular(kBorderRadius),
-        child: Container(
-          padding: const EdgeInsets.all(kPadding),
-          width: MediaQuery.of(context).size.width,
-          child: Row(
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  Text(
-                    "Title",
-                    style: Constants.title,
-                  ),
-                  Text(
-                    "subtitle",
-                    style: Constants.subtitle,
-                  ),
-                  Text(
-                    "date",
-                    style: Constants.time,
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
       ),
     );
   }
@@ -84,21 +44,63 @@ class TodoListItem extends HookWidget {
   Widget build(BuildContext context) {
     final todoList = useProvider(todoListNotifierProvider.notifier);
 
-    return InkWell(
-      onTap: () {},
-      child: ListTile(
-          title: Text(todo.title),
-          subtitle: Row(
-            children: [
-              Text(todo.description),
-              Text(DateFormat.yMMMMEEEEd().add_jm().format(todo.date)),
-            ],
-          ),
-          trailing: Checkbox(
-            value: todo.completed,
-            onChanged: (value) =>
-                todoList.updateTodo(todo.copyWith(completed: value!)),
-          )),
+    return Dismissible(
+      key: Key(todo.id),
+      background: Container(
+        color: primaryColor,
+      ),
+      onDismissed: (direction) {
+        setState(() {
+          todo.id.removeAt(todo.id);
+          ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text('List Removed')));
+        });
+      },
+      child: Container(
+        margin: EdgeInsets.all(8.0),
+        padding: EdgeInsets.all(5),
+        decoration: BoxDecoration(
+          boxShadow: kShadow,
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(kBorderRadius),
+        ),
+        child: ListTile(
+            title: Row(
+              children: [
+                Text(
+                  todo.title,
+                  style: Constants.title,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                ),
+              ],
+            ),
+            subtitle: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  todo.description,
+                  style: Constants.subtitle,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                ),
+                Text(
+                  DateFormat.yMMMMEEEEd().add_jm().format(todo.date),
+                  style: Constants.time,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                ),
+              ],
+            ),
+            trailing: Checkbox(
+              value: todo.completed,
+              onChanged: (value) => todoList.updateTodo(
+                todo.copyWith(
+                  completed: value!,
+                ),
+              ),
+            )),
+      ),
     );
   }
 }

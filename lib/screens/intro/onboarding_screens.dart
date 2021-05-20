@@ -49,14 +49,14 @@ class OnboardingPage extends StatelessWidget {
       skip: const Text(
         'Skip',
         style: TextStyle(
-          color: Colors.white,
+          color: Colors.orange,
           fontSize: 18,
         ),
       ),
       next: const Text(
         'Next',
         style: TextStyle(
-          color: Colors.white,
+          color: Colors.orange,
           fontSize: 18,
         ),
       ),
@@ -64,7 +64,7 @@ class OnboardingPage extends StatelessWidget {
         "Lets go",
         style: TextStyle(
           fontWeight: FontWeight.w600,
-          color: Colors.white,
+          color: Colors.orange,
           fontSize: 18,
         ),
       ),
