@@ -31,7 +31,7 @@ class TodoListPage extends HookWidget {
         padding: kFloatingPadding,
         itemBuilder: (BuildContext context, int index) =>
             DepartmentListItem(context),
-        separatorBuilder: (_, __) => const SizedBox(height: kPadding),
+        separatorBuilder: (_, __) => Divider(),
       ),
     );
   }
