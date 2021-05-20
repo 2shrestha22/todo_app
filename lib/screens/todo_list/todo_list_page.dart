@@ -45,7 +45,7 @@ class TodoListItem extends HookWidget {
     final todoList = useProvider(todoListNotifierProvider.notifier);
 
     return Dismissible(
-      key: Key(todo.id),
+      key: Key(todo.id), // it should be unique
       background: Container(
         color: primaryColor,
       ),
