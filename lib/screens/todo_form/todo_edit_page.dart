@@ -9,8 +9,8 @@ import '../../constants.dart';
 
 class TodoEditPage extends HookWidget {
   final Todo todo;
-  DateTime _date = DateTime.now();
-  final DateFormat _dateFormat = DateFormat('MMM dd, yyyy');
+  // DateTime _date = DateTime.now();
+  // final DateFormat _dateFormat = DateFormat('MMM dd, yyyy');
 
   final _golbalKey = GlobalKey<FormState>();
 
