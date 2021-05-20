@@ -28,10 +28,30 @@ class TodoListPage extends HookWidget {
       ),
       body: ListView.builder(
         itemCount: todoList.length,
-        itemBuilder: (context, index) => ListTile(
-          title: Text(todoList[index].title),
-        ),
+        itemBuilder: (context, index) => TodoListItem(todo: todoList[index]),
       ),
+    );
+  }
+}
+
+class TodoListItem extends HookWidget {
+  final Todo todo;
+
+  const TodoListItem({Key? key, required this.todo}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    final todoList = useProvider(todoListNotifierProvider.notifier);
+
+    return InkWell(
+      onTap: () {},
+      child: ListTile(
+          title: Text(todo.title),
+          subtitle: Text(todo.description),
+          trailing: Checkbox(
+            value: todo.completed,
+            onChanged: (value) =>
+                todoList.updateTodo(todo.copyWith(completed: value!)),
+          )),
     );
   }
 }

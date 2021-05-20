@@ -8,7 +8,7 @@ final todoServiceProvider = Provider((ref) => TodoService());
 class TodoService {
   final _box = Hive.box(todoBox);
 
-  Future<void> createTodo(Todo todo) async {
+  Future<void> saveTodo(Todo todo) async {
     return _box.put(todo.id, todo.toJson());
   }
 

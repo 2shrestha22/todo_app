@@ -12,8 +12,16 @@ class TodoList extends StateNotifier<List<Todo>> {
   final TodoService todoService;
 
   Future<void> createTodo(Todo todo) async {
-    await todoService.createTodo(todo);
     state = [...state, todo];
+    return todoService.saveTodo(todo);
+  }
+
+  Future<void> updateTodo(Todo updatedTodo) async {
+    state = [
+      for (final item in state)
+        if (item.id == updatedTodo.id) updatedTodo else item,
+    ];
+    return todoService.saveTodo(updatedTodo);
   }
 
   Future<void> deleteTodo(Todo todo) async {
