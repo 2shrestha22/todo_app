@@ -41,6 +41,12 @@ dev_dependencies:
   hive_generator: ^1.1.0
   json_serializable: ^4.1.2
 
+  
+flutter_native_splash:
+  color: "#454B66"
+  image: "assets/todo.png"
+  android: true
+  ios: true
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 # The following section is specific to Flutter.
