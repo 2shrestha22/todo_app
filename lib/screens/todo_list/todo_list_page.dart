@@ -58,7 +58,7 @@ class TodoListItem extends HookWidget {
       },
       child: Container(
         margin: EdgeInsets.all(8.0),
-        padding: EdgeInsets.all(5),
+        padding: EdgeInsets.only(left: 5),
         decoration: BoxDecoration(
           boxShadow: kShadow,
           color: Colors.white,
