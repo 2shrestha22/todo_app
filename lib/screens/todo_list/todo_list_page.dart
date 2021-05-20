@@ -26,9 +26,50 @@ class TodoListPage extends HookWidget {
         label: Text("Create Events"),
         icon: Icon(Icons.add),
       ),
-      body: ListView.builder(
+      body: ListView.separated(
         itemCount: todoList.length,
+        padding: kFloatingPadding,
         itemBuilder: (context, index) => TodoListItem(todo: todoList[index]),
+        separatorBuilder: (_, __) => const SizedBox(height: kPadding),
+      ),
+    );
+  }
+
+  Widget DepartmentListItem(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        boxShadow: kShadow,
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(kBorderRadius),
+      ),
+      child: Material(
+        clipBehavior: Clip.hardEdge,
+        borderRadius: BorderRadius.circular(kBorderRadius),
+        child: Container(
+          padding: const EdgeInsets.all(kPadding),
+          width: MediaQuery.of(context).size.width,
+          child: Row(
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: const [
+                  Text(
+                    "Title",
+                    style: Constants.title,
+                  ),
+                  Text(
+                    "subtitle",
+                    style: Constants.subtitle,
+                  ),
+                  Text(
+                    "date",
+                    style: Constants.time,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
