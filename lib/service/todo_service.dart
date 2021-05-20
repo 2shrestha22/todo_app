@@ -12,7 +12,13 @@ class TodoService {
     return _box.put(todo.id, todo.toJson());
   }
 
+  Future<void> deleteTodo(Todo todo) async {
+    return _box.delete(todo.id);
+  }
+
   Future<List<Todo>> getTodo() async {
-    return _box.values.map((e) => Todo.fromJson(e)).toList();
+    return _box.values
+        .map((e) => Todo.fromJson(e.cast<String, dynamic>()))
+        .toList();
   }
 }
