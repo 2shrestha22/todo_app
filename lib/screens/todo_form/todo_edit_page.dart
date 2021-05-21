@@ -23,6 +23,8 @@ class TodoEditPage extends HookWidget {
       ..text = todo.description;
     DateTime dateTime = todo.date;
 
+    final List<String> priorities = ['Low', 'Medium', 'High'];
+
     _submit() {
       if (_golbalKey.currentState!.validate()) {
         provider.saveTodo(
@@ -116,6 +118,41 @@ class TodoEditPage extends HookWidget {
                         dateTime = value;
                       },
                     ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Padding(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 20,
+                        ),
+                        child: DropdownButtonFormField(
+                          isDense: true,
+                          items: priorities.map((String priority) {
+                            return DropdownMenuItem(
+                                value: priority,
+                                child: Text(
+                                  priority,
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 18),
+                                ));
+                          }).toList(),
+                          style: TextStyle(fontSize: 18),
+                          decoration: InputDecoration(
+                              labelText: 'Priority',
+                              labelStyle: TextStyle(fontSize: 18),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10))),
+                          // validator: (input) => _priority == null
+                          // ? "Please Select a priority level"
+                          // : null,
+                          // onChanged: (value) {
+                          //   setState(
+                          //     () {
+                          //       _priority = value;
+                          //     },
+                          //   );
+                          // },
+                        )),
                     SizedBox(
                       height: 20,
                     ),
