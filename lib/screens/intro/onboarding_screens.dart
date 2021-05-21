@@ -72,7 +72,7 @@ class OnboardingPage extends StatelessWidget {
         size: const Size.square(10.0),
         activeSize: const Size(20.0, 10.0),
         activeColor: Colors.orange,
-        color: Colors.white,
+        color: primaryColor,
         spacing: const EdgeInsets.symmetric(horizontal: 3.0),
         activeShape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(25.0),

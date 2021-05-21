@@ -38,7 +38,7 @@ class TodoEditPage extends HookWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(todo.title.isEmpty ? 'Create todo' : 'Edit todo'),
+        title: Text(todo.title.isEmpty ? 'Create Task' : 'Edit Task'),
         centerTitle: true,
         backgroundColor: primaryColor,
       ),
@@ -80,12 +80,12 @@ class TodoEditPage extends HookWidget {
                         labelText: "Description",
                         // prefixIcon: Icon(Icons.event_note),
                         border: OutlineInputBorder(
-                            // borderRadius: BorderRadius.circular(22),
-                            // borderSide: BorderSide(
-                            //   color: Colors.white,
-                            //   width: 1.0,
-                            // ),
-                            ),
+                          borderRadius: BorderRadius.circular(22),
+                          borderSide: BorderSide(
+                            color: Colors.red,
+                            width: 1.0,
+                          ),
+                        ),
                       ),
                       validator: (input) =>
                           input != null && input.trim().isEmpty

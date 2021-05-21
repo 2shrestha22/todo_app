@@ -4,7 +4,7 @@ import 'package:flutter/painting.dart';
 const String introBox = 'intro';
 const String todoBox = 'todo';
 
-const String appName = 'Todo';
+const String appName = 'List of Todo';
 
 const Color primaryColor = Color(0xFFFF454B66);
 
@@ -17,10 +17,3 @@ const kShadow = [
     blurRadius: 4,
   )
 ];
-
-class Constants {
-  static const title =
-      TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 20);
-  static const subtitle = TextStyle(color: Colors.black, fontSize: 15);
-  static const time = TextStyle(color: Colors.black, fontSize: 15);
-}

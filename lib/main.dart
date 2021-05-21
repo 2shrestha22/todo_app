@@ -21,7 +21,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      themeMode: ThemeMode.light,
       title: 'Reminder App',
       debugShowCheckedModeBanner: false,
       initialRoute:
