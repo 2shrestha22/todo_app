@@ -8,7 +8,7 @@ const String appName = 'Todo';
 
 const Color primaryColor = Color(0xFFFF454B66);
 
-const kPadding = 8.0;
+const kPadding = 3.0;
 const kBorderRadius = 24.0;
 
 const kShadow = [
