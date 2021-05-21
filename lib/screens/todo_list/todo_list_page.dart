@@ -49,12 +49,10 @@ class TodoListItem extends HookWidget {
       background: Container(
         color: primaryColor,
       ),
-      onDismissed: (direction) {
-        setState(() {
-          todo.id.removeAt(todo.id);
-          ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text('List Removed')));
-        });
+      onDismissed: (direction) async {
+        await todoList.deleteTodo(todo);
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text('List Removed')));
       },
       child: Container(
         margin: EdgeInsets.all(8.0),
