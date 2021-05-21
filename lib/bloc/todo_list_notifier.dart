@@ -11,18 +11,23 @@ class TodoList extends StateNotifier<List<Todo>> {
   }
   final TodoService todoService;
 
-  Future<void> createTodo(Todo todo) async {
-    state = [...state, todo];
-    return todoService.saveTodo(todo);
+  Future<void> saveTodo(Todo todo) async {
+    await todoService.saveTodo(todo);
+    return getTodo();
   }
 
-  Future<void> updateTodo(Todo updatedTodo) async {
-    state = [
-      for (final item in state)
-        if (item.id == updatedTodo.id) updatedTodo else item,
-    ];
-    return todoService.saveTodo(updatedTodo);
-  }
+  // Future<void> createTodo(Todo todo) async {
+  //   state = [...state, todo];
+  //   return todoService.saveTodo(todo);
+  // }
+
+  // Future<void> updateTodo(Todo updatedTodo) async {
+  //   state = [
+  //     for (final item in state)
+  //       if (item.id == updatedTodo.id) updatedTodo else item,
+  //   ];
+  //   return todoService.saveTodo(updatedTodo);
+  // }
 
   Future<void> deleteTodo(Todo todo) async {
     await todoService.deleteTodo(todo);
@@ -31,6 +36,7 @@ class TodoList extends StateNotifier<List<Todo>> {
 
   Future<void> getTodo() async {
     var todo = await todoService.getTodo();
+    todo.sort((a, b) => a.date.compareTo(b.date));
     state = [...todo];
   }
 }
