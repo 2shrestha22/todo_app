@@ -49,57 +49,63 @@ class TodoListItem extends HookWidget {
       background: Container(
         color: primaryColor,
       ),
-      onDismissed: (direction) {
-        setState(() {
-          todo.id.removeAt(todo.id);
-          ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text('List Removed')));
-        });
+      onDismissed: (direction) async {
+        await todoList.deleteTodo(todo);
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text('Todo removed')));
       },
-      child: Container(
-        margin: EdgeInsets.all(8.0),
-        padding: EdgeInsets.only(left: 5),
-        decoration: BoxDecoration(
-          boxShadow: kShadow,
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(kBorderRadius),
+      child: InkWell(
+        onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => TodoEditPage(todo),
+          ),
         ),
-        child: ListTile(
-            title: Row(
-              children: [
-                Text(
-                  todo.title,
-                  style: Constants.title,
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 1,
-                ),
-              ],
-            ),
-            subtitle: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  todo.description,
-                  style: Constants.subtitle,
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 1,
-                ),
-                Text(
-                  DateFormat.yMMMMEEEEd().add_jm().format(todo.date),
-                  style: Constants.time,
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 1,
-                ),
-              ],
-            ),
-            trailing: Checkbox(
-              value: todo.completed,
-              onChanged: (value) => todoList.updateTodo(
-                todo.copyWith(
-                  completed: value!,
-                ),
+        child: Container(
+          margin: EdgeInsets.all(8.0),
+          padding: EdgeInsets.only(left: 5),
+          decoration: BoxDecoration(
+            boxShadow: kShadow,
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(kBorderRadius),
+          ),
+          child: ListTile(
+              title: Row(
+                children: [
+                  Text(
+                    todo.title,
+                    style: Constants.title,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                  ),
+                ],
               ),
-            )),
+              subtitle: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    todo.description,
+                    style: Constants.subtitle,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                  ),
+                  Text(
+                    DateFormat.yMMMMEEEEd().add_jm().format(todo.date),
+                    style: Constants.time,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                  ),
+                ],
+              ),
+              trailing: Checkbox(
+                value: todo.completed,
+                onChanged: (value) => todoList.saveTodo(
+                  todo.copyWith(
+                    completed: value!,
+                  ),
+                ),
+              )),
+        ),
       ),
     );
   }
