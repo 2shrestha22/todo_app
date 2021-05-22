@@ -23,16 +23,16 @@ class TodoEditPage extends HookWidget {
       ..text = todo.description;
     DateTime dateTime = todo.date;
 
-    final List<String> priorities = ['Low', 'Medium', 'High'];
+    TodoPriority todoPriority = todo.priority;
 
     _submit() {
       if (_golbalKey.currentState!.validate()) {
         provider.saveTodo(
           todo.copyWith(
-            title: titleController.text,
-            description: descriptionController.text,
-            date: dateTime,
-          ),
+              title: titleController.text,
+              description: descriptionController.text,
+              date: dateTime,
+              priority: todoPriority),
         );
         Navigator.pop(context);
       }
@@ -125,16 +125,18 @@ class TodoEditPage extends HookWidget {
                         padding: const EdgeInsets.symmetric(
                           vertical: 20,
                         ),
-                        child: DropdownButtonFormField(
+                        child: DropdownButtonFormField<TodoPriority>(
+                          value: todoPriority,
                           isDense: true,
-                          items: priorities.map((String priority) {
+                          items: TodoPriority.values.map((priority) {
                             return DropdownMenuItem(
-                                value: priority,
-                                child: Text(
-                                  priority,
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 18),
-                                ));
+                              value: priority,
+                              child: Text(
+                                priority.toNiceString,
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 18),
+                              ),
+                            );
                           }).toList(),
                           style: TextStyle(fontSize: 18),
                           decoration: InputDecoration(
@@ -145,13 +147,9 @@ class TodoEditPage extends HookWidget {
                           // validator: (input) => _priority == null
                           // ? "Please Select a priority level"
                           // : null,
-                          // onChanged: (value) {
-                          //   setState(
-                          //     () {
-                          //       _priority = value;
-                          //     },
-                          //   );
-                          // },
+                          onChanged: (value) {
+                            todoPriority = value!;
+                          },
                         )),
                     SizedBox(
                       height: 20,

@@ -25,13 +25,15 @@ class _$TodoTearOff {
       required String title,
       required DateTime date,
       required String description,
-      required bool completed}) {
+      required bool completed,
+      required TodoPriority priority}) {
     return _Todo(
       id: id,
       title: title,
       date: date,
       description: description,
       completed: completed,
+      priority: priority,
     );
   }
 
@@ -51,6 +53,7 @@ mixin _$Todo {
       throw _privateConstructorUsedError; // required TimeOfDay time,
   String get description => throw _privateConstructorUsedError;
   bool get completed => throw _privateConstructorUsedError;
+  TodoPriority get priority => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -66,7 +69,8 @@ abstract class $TodoCopyWith<$Res> {
       String title,
       DateTime date,
       String description,
-      bool completed});
+      bool completed,
+      TodoPriority priority});
 }
 
 /// @nodoc
@@ -84,6 +88,7 @@ class _$TodoCopyWithImpl<$Res> implements $TodoCopyWith<$Res> {
     Object? date = freezed,
     Object? description = freezed,
     Object? completed = freezed,
+    Object? priority = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -106,6 +111,10 @@ class _$TodoCopyWithImpl<$Res> implements $TodoCopyWith<$Res> {
           ? _value.completed
           : completed // ignore: cast_nullable_to_non_nullable
               as bool,
+      priority: priority == freezed
+          ? _value.priority
+          : priority // ignore: cast_nullable_to_non_nullable
+              as TodoPriority,
     ));
   }
 }
@@ -120,7 +129,8 @@ abstract class _$TodoCopyWith<$Res> implements $TodoCopyWith<$Res> {
       String title,
       DateTime date,
       String description,
-      bool completed});
+      bool completed,
+      TodoPriority priority});
 }
 
 /// @nodoc
@@ -139,6 +149,7 @@ class __$TodoCopyWithImpl<$Res> extends _$TodoCopyWithImpl<$Res>
     Object? date = freezed,
     Object? description = freezed,
     Object? completed = freezed,
+    Object? priority = freezed,
   }) {
     return _then(_Todo(
       id: id == freezed
@@ -161,19 +172,24 @@ class __$TodoCopyWithImpl<$Res> extends _$TodoCopyWithImpl<$Res>
           ? _value.completed
           : completed // ignore: cast_nullable_to_non_nullable
               as bool,
+      priority: priority == freezed
+          ? _value.priority
+          : priority // ignore: cast_nullable_to_non_nullable
+              as TodoPriority,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_Todo implements _Todo {
+class _$_Todo with DiagnosticableTreeMixin implements _Todo {
   const _$_Todo(
       {required this.id,
       required this.title,
       required this.date,
       required this.description,
-      required this.completed});
+      required this.completed,
+      required this.priority});
 
   factory _$_Todo.fromJson(Map<String, dynamic> json) =>
       _$_$_TodoFromJson(json);
@@ -188,10 +204,25 @@ class _$_Todo implements _Todo {
   final String description;
   @override
   final bool completed;
+  @override
+  final TodoPriority priority;
 
   @override
-  String toString() {
-    return 'Todo(id: $id, title: $title, date: $date, description: $description, completed: $completed)';
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'Todo(id: $id, title: $title, date: $date, description: $description, completed: $completed, priority: $priority)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'Todo'))
+      ..add(DiagnosticsProperty('id', id))
+      ..add(DiagnosticsProperty('title', title))
+      ..add(DiagnosticsProperty('date', date))
+      ..add(DiagnosticsProperty('description', description))
+      ..add(DiagnosticsProperty('completed', completed))
+      ..add(DiagnosticsProperty('priority', priority));
   }
 
   @override
@@ -209,7 +240,10 @@ class _$_Todo implements _Todo {
                     .equals(other.description, description)) &&
             (identical(other.completed, completed) ||
                 const DeepCollectionEquality()
-                    .equals(other.completed, completed)));
+                    .equals(other.completed, completed)) &&
+            (identical(other.priority, priority) ||
+                const DeepCollectionEquality()
+                    .equals(other.priority, priority)));
   }
 
   @override
@@ -219,7 +253,8 @@ class _$_Todo implements _Todo {
       const DeepCollectionEquality().hash(title) ^
       const DeepCollectionEquality().hash(date) ^
       const DeepCollectionEquality().hash(description) ^
-      const DeepCollectionEquality().hash(completed);
+      const DeepCollectionEquality().hash(completed) ^
+      const DeepCollectionEquality().hash(priority);
 
   @JsonKey(ignore: true)
   @override
@@ -238,7 +273,8 @@ abstract class _Todo implements Todo {
       required String title,
       required DateTime date,
       required String description,
-      required bool completed}) = _$_Todo;
+      required bool completed,
+      required TodoPriority priority}) = _$_Todo;
 
   factory _Todo.fromJson(Map<String, dynamic> json) = _$_Todo.fromJson;
 
@@ -252,6 +288,8 @@ abstract class _Todo implements Todo {
   String get description => throw _privateConstructorUsedError;
   @override
   bool get completed => throw _privateConstructorUsedError;
+  @override
+  TodoPriority get priority => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$TodoCopyWith<_Todo> get copyWith => throw _privateConstructorUsedError;

@@ -119,6 +119,18 @@ class TodoListItem extends HookWidget {
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
                   ),
+                  Text(
+                    todo.priority.toNiceString,
+                    style: TextStyle(
+                      decoration: todo.completed
+                          ? TextDecoration.lineThrough
+                          : TextDecoration.none,
+                      color: Colors.black,
+                      fontSize: 15,
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                  ),
                 ],
               ),
               trailing: Checkbox(
