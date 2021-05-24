@@ -612,7 +612,7 @@ packages:
     source: hosted
     version: "0.3.0"
   timezone:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: timezone
       url: "https://pub.dartlang.org"

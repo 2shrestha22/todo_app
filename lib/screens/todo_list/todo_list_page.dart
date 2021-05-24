@@ -8,7 +8,6 @@ import 'package:todo_app/constants.dart';
 import 'package:todo_app/models/todo.dart';
 import 'package:todo_app/screens/todo_form/todo_edit_page.dart';
 import 'package:timezone/timezone.dart' as tz;
-import 'package:timezone/data/latest.dart' as tz;
 
 FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
@@ -41,7 +40,6 @@ class TodoListPage extends HookWidget {
   }
 }
 
-// ignore: must_be_immutable
 class TodoListItem extends HookWidget {
   final Todo todo;
 
@@ -195,7 +193,7 @@ class TodoListItem extends HookWidget {
 }
 
 void initializeSetting() async {
-  var initializeAndroid = AndroidInitializationSettings('my_logo');
+  var initializeAndroid = AndroidInitializationSettings('defaulticon.png');
   var initializeSetting = InitializationSettings(android: initializeAndroid);
   await flutterLocalNotificationsPlugin.initialize(initializeSetting);
 }
