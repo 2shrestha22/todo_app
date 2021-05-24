@@ -16,8 +16,11 @@ Future<void> main() async {
     Hive.openBox(todoBox),
     Hive.openBox(introBox),
   ]);
+  //TODO remove his deleteFromDisk
+  // await Hive.box(todoBox).deleteFromDisk();
+
   WidgetsFlutterBinding.ensureInitialized();
-  final initializeAndroid = AndroidInitializationSettings('defaulticon.png');
+  final initializeAndroid = AndroidInitializationSettings('defaulticon');
   final initializeSetting = InitializationSettings(android: initializeAndroid);
   await flutterLocalNotificationsPlugin.initialize(initializeSetting);
   tz.initializeTimeZones();
