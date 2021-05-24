@@ -47,13 +47,6 @@ class TodoListItem extends HookWidget {
   TodoListItem({Key? key, required this.todo}) : super(key: key);
 
   @override
-  void initState() {
-    initializeSetting();
-    tz.initializeTimeZones();
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final todoList = useProvider(todoListNotifierProvider.notifier);
 
@@ -191,10 +184,4 @@ class TodoListItem extends HookWidget {
       androidAllowWhileIdle: true,
     );
   }
-}
-
-void initializeSetting() async {
-  var initializeAndroid = AndroidInitializationSettings('defaulticon.png');
-  var initializeSetting = InitializationSettings(android: initializeAndroid);
-  await flutterLocalNotificationsPlugin.initialize(initializeSetting);
 }
