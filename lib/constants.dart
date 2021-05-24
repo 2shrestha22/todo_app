@@ -4,12 +4,11 @@ import 'package:flutter/painting.dart';
 const String introBox = 'intro';
 const String todoBox = 'todo';
 
-const String appName = 'List of Todo';
+const String appName = 'List of Task';
 
 const Color primaryColor = Color(0xFFFF454B66);
 
-const kPadding = 3.0;
-const kBorderRadius = 24.0;
+const kBorderRadius = 15.0;
 
 const kShadow = [
   BoxShadow(

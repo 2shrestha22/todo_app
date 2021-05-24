@@ -27,10 +27,9 @@ class TodoListPage extends HookWidget {
         label: Text("Create Events"),
         icon: Icon(Icons.border_color),
       ),
-      body: ListView.separated(
+      body: ListView.builder(
         itemCount: todoList.length,
         itemBuilder: (context, index) => TodoListItem(todo: todoList[index]),
-        separatorBuilder: (_, __) => const SizedBox(height: kPadding),
       ),
     );
   }
@@ -48,15 +47,22 @@ class TodoListItem extends HookWidget {
       key: Key(todo.id), // it should be unique
       background: Container(
         color: primaryColor,
-        child: Icon(
-          Icons.delete_forever,
-          color: Colors.white,
+        child: Align(
+          alignment: Alignment.centerRight,
+          child: Icon(
+            Icons.delete_forever,
+            color: Colors.white,
+            size: 35,
+          ),
         ),
       ),
       onDismissed: (direction) async {
         await todoList.deleteTodo(todo);
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text('${todo.title} is removed')));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('${todo.title} is removed'),
+          ),
+        );
       },
       child: InkWell(
         onTap: () => Navigator.push(
@@ -74,73 +80,74 @@ class TodoListItem extends HookWidget {
             borderRadius: BorderRadius.circular(kBorderRadius),
           ),
           child: ListTile(
-              title: Row(
-                children: [
-                  Text(
-                    todo.title,
-                    style: TextStyle(
-                      decoration: todo.completed
-                          ? TextDecoration.lineThrough
-                          : TextDecoration.none,
-                      color: Colors.black,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
+            title: Row(
+              children: [
+                Text(
+                  todo.title,
+                  style: TextStyle(
+                    decoration: todo.completed
+                        ? TextDecoration.lineThrough
+                        : TextDecoration.none,
+                    color: Colors.black,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
                   ),
-                ],
-              ),
-              subtitle: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    todo.description,
-                    // style: Constants.subtitle,
-                    style: TextStyle(
-                      decoration: todo.completed
-                          ? TextDecoration.lineThrough
-                          : TextDecoration.none,
-                      color: Colors.black,
-                      fontSize: 15,
-                    ),
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
-                  ),
-                  Text(
-                    DateFormat.yMMMMEEEEd().add_jm().format(todo.date),
-                    style: TextStyle(
-                      decoration: todo.completed
-                          ? TextDecoration.lineThrough
-                          : TextDecoration.none,
-                      color: Colors.black,
-                      fontSize: 15,
-                    ),
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
-                  ),
-                  Text(
-                    todo.priority.toNiceString,
-                    style: TextStyle(
-                      decoration: todo.completed
-                          ? TextDecoration.lineThrough
-                          : TextDecoration.none,
-                      color: Colors.black,
-                      fontSize: 15,
-                    ),
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
-                  ),
-                ],
-              ),
-              trailing: Checkbox(
-                value: todo.completed,
-                onChanged: (value) => todoList.saveTodo(
-                  todo.copyWith(
-                    completed: value!,
-                  ),
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
                 ),
-              )),
+              ],
+            ),
+            subtitle: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  todo.description,
+                  // style: Constants.subtitle,
+                  style: TextStyle(
+                    decoration: todo.completed
+                        ? TextDecoration.lineThrough
+                        : TextDecoration.none,
+                    color: Colors.black,
+                    fontSize: 15,
+                  ),
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                ),
+                Text(
+                  todo.priority.toNiceString.toUpperCase(),
+                  style: TextStyle(
+                    decoration: todo.completed
+                        ? TextDecoration.lineThrough
+                        : TextDecoration.none,
+                    color: Colors.black,
+                    fontSize: 15,
+                  ),
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                ),
+                Text(
+                  DateFormat.yMMMMEEEEd().add_jm().format(todo.date),
+                  style: TextStyle(
+                    decoration: todo.completed
+                        ? TextDecoration.lineThrough
+                        : TextDecoration.none,
+                    color: Colors.black,
+                    fontSize: 15,
+                  ),
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                ),
+              ],
+            ),
+            trailing: Checkbox(
+              value: todo.completed,
+              onChanged: (value) => todoList.saveTodo(
+                todo.copyWith(
+                  completed: value!,
+                ),
+              ),
+            ),
+          ),
         ),
       ),
     );
