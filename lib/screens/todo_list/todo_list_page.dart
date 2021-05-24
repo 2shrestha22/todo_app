@@ -48,6 +48,13 @@ class TodoListItem extends HookWidget {
   TodoListItem({Key? key, required this.todo}) : super(key: key);
 
   @override
+  void initState() {
+    initializeSetting();
+    tz.initializeTimeZones();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final todoList = useProvider(todoListNotifierProvider.notifier);
 
@@ -163,7 +170,7 @@ class TodoListItem extends HookWidget {
 
   Future<void> displayNotification() async {
     flutterLocalNotificationsPlugin.zonedSchedule(
-      0, //yo id inter hunuparxa
+      todo.id, //yo id inter hunuparxa
       todo.title,
       todo.description,
       tz.TZDateTime.from(todo.date, tz.local),
