@@ -51,7 +51,7 @@ class TodoListItem extends HookWidget {
     final todoList = useProvider(todoListNotifierProvider.notifier);
 
     return Dismissible(
-      key: Key(todo.id.toString()), // it should be unique
+      key: Key(todo.key.toString()), // it should be unique
       background: Container(
         color: primaryColor,
         child: Align(
@@ -90,7 +90,7 @@ class TodoListItem extends HookWidget {
             title: Row(
               children: [
                 Text(
-                  todo.title,
+                  todo.key.toString(),
                   style: TextStyle(
                     decoration: todo.completed
                         ? TextDecoration.lineThrough
@@ -170,7 +170,7 @@ class TodoListItem extends HookWidget {
 
   Future<void> displayNotification(DateTime dateTime) async {
     flutterLocalNotificationsPlugin.zonedSchedule(
-      todo.id!, //yo id inter hunuparxa
+      todo.key, //yo id inter hunuparxa
       todo.title,
       todo.description,
       tz.TZDateTime.from(dateTime, tz.local),

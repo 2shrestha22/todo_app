@@ -16,10 +16,10 @@ class TodoList extends StateNotifier<List<Todo>> {
     return getTodo();
   }
 
-  // Future<void> createTodo(Todo todo) async {
-  //   state = [...state, todo];
-  //   return todoService.saveTodo(todo);
-  // }
+  Future<void> createTodo(Todo todo) async {
+    await todoService.createTodo(todo);
+    return getTodo();
+  }
 
   // Future<void> updateTodo(Todo updatedTodo) async {
   //   state = [
@@ -31,7 +31,8 @@ class TodoList extends StateNotifier<List<Todo>> {
 
   Future<void> deleteTodo(Todo todo) async {
     await todoService.deleteTodo(todo);
-    state = state.where((element) => element != todo).toList();
+    return getTodo();
+    // state = state.where((element) => element != todo).toList();
   }
 
   Future<void> getTodo() async {

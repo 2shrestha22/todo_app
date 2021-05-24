@@ -4,6 +4,7 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:todo_app/constants.dart';
+import 'package:todo_app/models/todo.dart';
 import 'package:todo_app/screens/intro/onboarding_screens.dart';
 import 'package:todo_app/screens/todo_list/todo_list_page.dart';
 import 'package:timezone/data/latest.dart' as tz;
@@ -11,19 +12,26 @@ import 'package:timezone/data/latest.dart' as tz;
 late int intro;
 
 Future<void> main() async {
+  // init HiveDB
   await Hive.initFlutter();
+  // register type adapter for custom data type i.e. todo
+  Hive.registerAdapter(TodoAdapter());
+  Hive.registerAdapter(TodoPriorityAdapter());
+  // open boxes for todo and intro
   await Future.wait([
-    Hive.openBox(todoBox),
+    Hive.openBox<Todo>(todoBox),
     Hive.openBox(introBox),
   ]);
   //TODO remove his deleteFromDisk
-  // await Hive.box(todoBox).deleteFromDisk();
+  await Hive.box<Todo>(todoBox).clear();
 
+  // local notification related
   WidgetsFlutterBinding.ensureInitialized();
   final initializeAndroid = AndroidInitializationSettings('defaulticon');
   final initializeSetting = InitializationSettings(android: initializeAndroid);
   await flutterLocalNotificationsPlugin.initialize(initializeSetting);
   tz.initializeTimeZones();
+
   runApp(ProviderScope(child: MyApp()));
 }
 

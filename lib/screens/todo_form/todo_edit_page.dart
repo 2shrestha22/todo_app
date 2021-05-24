@@ -27,13 +27,25 @@ class TodoEditPage extends HookWidget {
 
     _submit() {
       if (_golbalKey.currentState!.validate()) {
-        provider.saveTodo(
-          todo.copyWith(
-              title: titleController.text,
-              description: descriptionController.text,
-              date: dateTime,
-              priority: todoPriority),
-        );
+        if (todo.title.isEmpty) {
+          //new todo
+          provider.createTodo(
+            todo.copyWith(
+                title: titleController.text,
+                description: descriptionController.text,
+                date: dateTime,
+                priority: todoPriority),
+          );
+        } else {
+          // editing old todo
+          provider.saveTodo(
+            todo.copyWith(
+                title: titleController.text,
+                description: descriptionController.text,
+                date: dateTime,
+                priority: todoPriority),
+          );
+        }
         Navigator.pop(context);
       }
     }

@@ -21,14 +21,12 @@ class _$TodoTearOff {
   const _$TodoTearOff();
 
   _Todo call(
-      {int? id,
-      required String title,
-      required DateTime date,
-      required String description,
-      required bool completed,
-      required TodoPriority priority}) {
+      {@HiveField(1) required String title,
+      @HiveField(2) required DateTime date,
+      @HiveField(3) required String description,
+      @HiveField(4) required bool completed,
+      @HiveField(5) required TodoPriority priority}) {
     return _Todo(
-      id: id,
       title: title,
       date: date,
       description: description,
@@ -47,12 +45,16 @@ const $Todo = _$TodoTearOff();
 
 /// @nodoc
 mixin _$Todo {
-  int? get id => throw _privateConstructorUsedError;
+  @HiveField(1)
   String get title => throw _privateConstructorUsedError;
+  @HiveField(2)
   DateTime get date =>
       throw _privateConstructorUsedError; // required TimeOfDay time,
+  @HiveField(3)
   String get description => throw _privateConstructorUsedError;
+  @HiveField(4)
   bool get completed => throw _privateConstructorUsedError;
+  @HiveField(5)
   TodoPriority get priority => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -65,12 +67,11 @@ abstract class $TodoCopyWith<$Res> {
   factory $TodoCopyWith(Todo value, $Res Function(Todo) then) =
       _$TodoCopyWithImpl<$Res>;
   $Res call(
-      {int? id,
-      String title,
-      DateTime date,
-      String description,
-      bool completed,
-      TodoPriority priority});
+      {@HiveField(1) String title,
+      @HiveField(2) DateTime date,
+      @HiveField(3) String description,
+      @HiveField(4) bool completed,
+      @HiveField(5) TodoPriority priority});
 }
 
 /// @nodoc
@@ -83,7 +84,6 @@ class _$TodoCopyWithImpl<$Res> implements $TodoCopyWith<$Res> {
 
   @override
   $Res call({
-    Object? id = freezed,
     Object? title = freezed,
     Object? date = freezed,
     Object? description = freezed,
@@ -91,10 +91,6 @@ class _$TodoCopyWithImpl<$Res> implements $TodoCopyWith<$Res> {
     Object? priority = freezed,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int?,
       title: title == freezed
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -125,12 +121,11 @@ abstract class _$TodoCopyWith<$Res> implements $TodoCopyWith<$Res> {
       __$TodoCopyWithImpl<$Res>;
   @override
   $Res call(
-      {int? id,
-      String title,
-      DateTime date,
-      String description,
-      bool completed,
-      TodoPriority priority});
+      {@HiveField(1) String title,
+      @HiveField(2) DateTime date,
+      @HiveField(3) String description,
+      @HiveField(4) bool completed,
+      @HiveField(5) TodoPriority priority});
 }
 
 /// @nodoc
@@ -144,7 +139,6 @@ class __$TodoCopyWithImpl<$Res> extends _$TodoCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? id = freezed,
     Object? title = freezed,
     Object? date = freezed,
     Object? description = freezed,
@@ -152,10 +146,6 @@ class __$TodoCopyWithImpl<$Res> extends _$TodoCopyWithImpl<$Res>
     Object? priority = freezed,
   }) {
     return _then(_Todo(
-      id: id == freezed
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int?,
       title: title == freezed
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -182,34 +172,37 @@ class __$TodoCopyWithImpl<$Res> extends _$TodoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Todo with DiagnosticableTreeMixin implements _Todo {
-  const _$_Todo(
-      {this.id,
-      required this.title,
-      required this.date,
-      required this.description,
-      required this.completed,
-      required this.priority});
+class _$_Todo extends _Todo with DiagnosticableTreeMixin {
+  _$_Todo(
+      {@HiveField(1) required this.title,
+      @HiveField(2) required this.date,
+      @HiveField(3) required this.description,
+      @HiveField(4) required this.completed,
+      @HiveField(5) required this.priority})
+      : super._();
 
   factory _$_Todo.fromJson(Map<String, dynamic> json) =>
       _$_$_TodoFromJson(json);
 
   @override
-  final int? id;
-  @override
+  @HiveField(1)
   final String title;
   @override
+  @HiveField(2)
   final DateTime date;
   @override // required TimeOfDay time,
+  @HiveField(3)
   final String description;
   @override
+  @HiveField(4)
   final bool completed;
   @override
+  @HiveField(5)
   final TodoPriority priority;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Todo(id: $id, title: $title, date: $date, description: $description, completed: $completed, priority: $priority)';
+    return 'Todo(title: $title, date: $date, description: $description, completed: $completed, priority: $priority)';
   }
 
   @override
@@ -217,7 +210,6 @@ class _$_Todo with DiagnosticableTreeMixin implements _Todo {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'Todo'))
-      ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('title', title))
       ..add(DiagnosticsProperty('date', date))
       ..add(DiagnosticsProperty('description', description))
@@ -229,8 +221,6 @@ class _$_Todo with DiagnosticableTreeMixin implements _Todo {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _Todo &&
-            (identical(other.id, id) ||
-                const DeepCollectionEquality().equals(other.id, id)) &&
             (identical(other.title, title) ||
                 const DeepCollectionEquality().equals(other.title, title)) &&
             (identical(other.date, date) ||
@@ -249,7 +239,6 @@ class _$_Todo with DiagnosticableTreeMixin implements _Todo {
   @override
   int get hashCode =>
       runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(title) ^
       const DeepCollectionEquality().hash(date) ^
       const DeepCollectionEquality().hash(description) ^
@@ -267,28 +256,31 @@ class _$_Todo with DiagnosticableTreeMixin implements _Todo {
   }
 }
 
-abstract class _Todo implements Todo {
-  const factory _Todo(
-      {int? id,
-      required String title,
-      required DateTime date,
-      required String description,
-      required bool completed,
-      required TodoPriority priority}) = _$_Todo;
+abstract class _Todo extends Todo {
+  factory _Todo(
+      {@HiveField(1) required String title,
+      @HiveField(2) required DateTime date,
+      @HiveField(3) required String description,
+      @HiveField(4) required bool completed,
+      @HiveField(5) required TodoPriority priority}) = _$_Todo;
+  _Todo._() : super._();
 
   factory _Todo.fromJson(Map<String, dynamic> json) = _$_Todo.fromJson;
 
   @override
-  int? get id => throw _privateConstructorUsedError;
-  @override
+  @HiveField(1)
   String get title => throw _privateConstructorUsedError;
   @override
+  @HiveField(2)
   DateTime get date => throw _privateConstructorUsedError;
   @override // required TimeOfDay time,
+  @HiveField(3)
   String get description => throw _privateConstructorUsedError;
   @override
+  @HiveField(4)
   bool get completed => throw _privateConstructorUsedError;
   @override
+  @HiveField(5)
   TodoPriority get priority => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
