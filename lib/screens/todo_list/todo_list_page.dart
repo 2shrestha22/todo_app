@@ -8,6 +8,7 @@ import 'package:todo_app/constants.dart';
 import 'package:todo_app/models/todo.dart';
 import 'package:todo_app/screens/todo_form/todo_edit_page.dart';
 import 'package:timezone/timezone.dart' as tz;
+import 'package:timezone/data/latest.dart' as tz;
 
 FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
@@ -45,12 +46,12 @@ class TodoListItem extends HookWidget {
 
   TodoListItem({Key? key, required this.todo}) : super(key: key);
 
-  // @override
-  // void initState() {
-  //   initializeSetting();
-  //   tz.initializeTimeZones();
-  //   super.initState();
-  // }
+  @override
+  void initState() {
+    initializeSetting();
+    tz.initializeTimeZones();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
