@@ -154,12 +154,20 @@ class TodoListItem extends HookWidget {
                 ),
               ],
             ),
-            trailing: Checkbox(
+            leading: Checkbox(
               value: todo.completed,
               onChanged: (value) => todoList.saveTodo(
                 todo.copyWith(
                   completed: value!,
                 ),
+              ),
+            ),
+            trailing: IconButton(
+              onPressed: () {
+                displayNotification(todo.date);
+              },
+              icon: Icon(
+                Icons.notification_add,
               ),
             ),
           ),
@@ -168,12 +176,12 @@ class TodoListItem extends HookWidget {
     );
   }
 
-  Future<void> displayNotification() async {
+  Future<void> displayNotification(DateTime dateTime) async {
     flutterLocalNotificationsPlugin.zonedSchedule(
       todo.id, //yo id inter hunuparxa
       todo.title,
       todo.description,
-      tz.TZDateTime.from(todo.date, tz.local),
+      tz.TZDateTime.from(dateTime, tz.local),
       NotificationDetails(
         android: AndroidNotificationDetails(
             'channel id', 'channel name', 'channel description'),
