@@ -17,8 +17,10 @@ extension TodoPriorityX on TodoPriority {
 
 @freezed
 class Todo with _$Todo {
+  /// id is null for empty note
+  /// id is assigned by database auto increment key
   const factory Todo({
-    required String id,
+    int? id,
     required String title,
     required DateTime date,
     // required TimeOfDay time,
@@ -28,7 +30,6 @@ class Todo with _$Todo {
   }) = _Todo;
 
   factory Todo.empty() => Todo(
-        id: Uuid().v4(),
         title: '',
         date: DateTime.now(),
         // time: TimeOfDay.now(),

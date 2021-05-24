@@ -21,7 +21,7 @@ class _$TodoTearOff {
   const _$TodoTearOff();
 
   _Todo call(
-      {required String id,
+      {int? id,
       required String title,
       required DateTime date,
       required String description,
@@ -47,7 +47,7 @@ const $Todo = _$TodoTearOff();
 
 /// @nodoc
 mixin _$Todo {
-  String get id => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   DateTime get date =>
       throw _privateConstructorUsedError; // required TimeOfDay time,
@@ -65,7 +65,7 @@ abstract class $TodoCopyWith<$Res> {
   factory $TodoCopyWith(Todo value, $Res Function(Todo) then) =
       _$TodoCopyWithImpl<$Res>;
   $Res call(
-      {String id,
+      {int? id,
       String title,
       DateTime date,
       String description,
@@ -94,7 +94,7 @@ class _$TodoCopyWithImpl<$Res> implements $TodoCopyWith<$Res> {
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int?,
       title: title == freezed
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -125,7 +125,7 @@ abstract class _$TodoCopyWith<$Res> implements $TodoCopyWith<$Res> {
       __$TodoCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String id,
+      {int? id,
       String title,
       DateTime date,
       String description,
@@ -155,7 +155,7 @@ class __$TodoCopyWithImpl<$Res> extends _$TodoCopyWithImpl<$Res>
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int?,
       title: title == freezed
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -184,7 +184,7 @@ class __$TodoCopyWithImpl<$Res> extends _$TodoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_Todo with DiagnosticableTreeMixin implements _Todo {
   const _$_Todo(
-      {required this.id,
+      {this.id,
       required this.title,
       required this.date,
       required this.description,
@@ -195,7 +195,7 @@ class _$_Todo with DiagnosticableTreeMixin implements _Todo {
       _$_$_TodoFromJson(json);
 
   @override
-  final String id;
+  final int? id;
   @override
   final String title;
   @override
@@ -269,7 +269,7 @@ class _$_Todo with DiagnosticableTreeMixin implements _Todo {
 
 abstract class _Todo implements Todo {
   const factory _Todo(
-      {required String id,
+      {int? id,
       required String title,
       required DateTime date,
       required String description,
@@ -279,7 +279,7 @@ abstract class _Todo implements Todo {
   factory _Todo.fromJson(Map<String, dynamic> json) = _$_Todo.fromJson;
 
   @override
-  String get id => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
   @override
   String get title => throw _privateConstructorUsedError;
   @override

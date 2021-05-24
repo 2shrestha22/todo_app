@@ -8,7 +8,7 @@ part of 'todo.dart';
 
 _$_Todo _$_$_TodoFromJson(Map<String, dynamic> json) {
   return _$_Todo(
-    id: json['id'] as String,
+    id: json['id'] as int?,
     title: json['title'] as String,
     date: DateTime.parse(json['date'] as String),
     description: json['description'] as String,

@@ -52,7 +52,7 @@ class TodoListItem extends HookWidget {
     final todoList = useProvider(todoListNotifierProvider.notifier);
 
     return Dismissible(
-      key: Key(todo.id), // it should be unique
+      key: Key(todo.id.toString()), // it should be unique
       background: Container(
         color: primaryColor,
         child: Align(
