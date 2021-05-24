@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:todo_app/bloc/todo_list_notifier.dart';
 import 'package:todo_app/constants.dart';
 import 'package:todo_app/models/todo.dart';
 import 'package:todo_app/screens/todo_form/todo_edit_page.dart';
+import 'package:timezone/timezone.dart' as tz;
+import 'package:timezone/data/latest.dart' as tz;
+
+FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
 
 class TodoListPage extends HookWidget {
   @override
@@ -35,10 +41,12 @@ class TodoListPage extends HookWidget {
   }
 }
 
+// ignore: must_be_immutable
 class TodoListItem extends HookWidget {
   final Todo todo;
 
-  const TodoListItem({Key? key, required this.todo}) : super(key: key);
+  TodoListItem({Key? key, required this.todo}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final todoList = useProvider(todoListNotifierProvider.notifier);
@@ -152,4 +160,27 @@ class TodoListItem extends HookWidget {
       ),
     );
   }
+
+  Future<void> displayNotification() async {
+    flutterLocalNotificationsPlugin.zonedSchedule(
+      0, //yo id inter hunuparxa
+      todo.title,
+      todo.description,
+      tz.TZDateTime.from(todo.date, tz.local),
+      NotificationDetails(
+        android: AndroidNotificationDetails(
+            'channel id', 'channel name', 'channel description'),
+      ),
+
+      uiLocalNotificationDateInterpretation:
+          UILocalNotificationDateInterpretation.absoluteTime,
+      androidAllowWhileIdle: true,
+    );
+  }
+}
+
+void initializeSetting() async {
+  var initializeAndroid = AndroidInitializationSettings('my_logo');
+  var initializeSetting = InitializationSettings(android: initializeAndroid);
+  await flutterLocalNotificationsPlugin.initialize(initializeSetting);
 }

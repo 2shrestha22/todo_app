@@ -53,6 +53,9 @@ class TodoEditPage extends HookWidget {
                 key: _golbalKey,
                 child: Column(
                   children: [
+                    SizedBox(
+                      height: 8,
+                    ),
                     TextFormField(
                       controller: titleController,
                       style: TextStyle(fontSize: 15),
@@ -72,7 +75,7 @@ class TodoEditPage extends HookWidget {
                               : null,
                     ),
                     SizedBox(
-                      height: 20,
+                      height: 10,
                     ),
                     TextFormField(
                       maxLines: 10,
@@ -95,7 +98,7 @@ class TodoEditPage extends HookWidget {
                               : null,
                     ),
                     SizedBox(
-                      height: 20,
+                      height: 10,
                     ),
                     DateTimeFormField(
                       initialValue: dateTime,
@@ -119,7 +122,7 @@ class TodoEditPage extends HookWidget {
                       },
                     ),
                     SizedBox(
-                      height: 20,
+                      height: 10,
                     ),
                     Padding(
                         padding: const EdgeInsets.symmetric(
@@ -152,7 +155,7 @@ class TodoEditPage extends HookWidget {
                           },
                         )),
                     SizedBox(
-                      height: 20,
+                      height: 10,
                     ),
                     ConstrainedBox(
                       constraints: const BoxConstraints.tightFor(
