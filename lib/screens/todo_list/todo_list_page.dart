@@ -90,13 +90,13 @@ class TodoListItem extends HookWidget {
             title: Row(
               children: [
                 Text(
-                  todo.key.toString(),
+                  todo.title.toString(),
                   style: TextStyle(
                     decoration: todo.completed
                         ? TextDecoration.lineThrough
                         : TextDecoration.none,
                     color: Colors.black,
-                    fontSize: 20,
+                    fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
                   overflow: TextOverflow.ellipsis,
@@ -115,7 +115,7 @@ class TodoListItem extends HookWidget {
                         ? TextDecoration.lineThrough
                         : TextDecoration.none,
                     color: Colors.black,
-                    fontSize: 15,
+                    fontSize: 16,
                   ),
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
@@ -126,7 +126,7 @@ class TodoListItem extends HookWidget {
                     decoration: todo.completed
                         ? TextDecoration.lineThrough
                         : TextDecoration.none,
-                    color: Colors.black,
+                    color: Colors.orange,
                     fontSize: 15,
                   ),
                   overflow: TextOverflow.ellipsis,
@@ -138,7 +138,7 @@ class TodoListItem extends HookWidget {
                     decoration: todo.completed
                         ? TextDecoration.lineThrough
                         : TextDecoration.none,
-                    color: Colors.black,
+                    color: primaryColor,
                     fontSize: 15,
                   ),
                   overflow: TextOverflow.ellipsis,
@@ -146,20 +146,21 @@ class TodoListItem extends HookWidget {
                 ),
               ],
             ),
-            leading: Checkbox(
-              value: todo.completed,
-              onChanged: (value) => todoList.saveTodo(
-                todo.copyWith(
-                  completed: value!,
-                ),
-              ),
-            ),
+            // leading: Checkbox(
+            //   value: todo.completed,
+            //   onChanged: (value) => todoList.saveTodo(
+            //     todo.copyWith(
+            //       completed: value!,
+            //     ),
+            //   ),
+            // ),
             trailing: IconButton(
               onPressed: () {
                 displayNotification(todo.date);
               },
               icon: Icon(
                 Icons.notification_add,
+                color: primaryColor,
               ),
             ),
           ),
